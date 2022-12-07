@@ -4,7 +4,7 @@ import { validateEmail } from '../util/validations.js';
 
 const router = Router()
 
-router.get('/', async (req, res, next) => {
+router.get('/', async (req, res) => {
   const employees = new Employees()
 
   let length = req.query.length ?? 1000
@@ -22,11 +22,12 @@ router.get('/', async (req, res, next) => {
   })
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', async (req, res) => {
   let name = req.body.name
   let email = req.body.email
   let profile_picture = req.body.name
 
+  // Validations
   if (!name || name == "") {
     res.status(400).json({ message: "Please enter a valid name" })
     return
@@ -48,7 +49,8 @@ router.post('/', async (req, res, next) => {
   res.json({ message: "success" })
 })
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', async (req, res) => {
+  // Validating the ID
   if (isNaN(req.params.id)) {
     res.status(400).json({ message: "Please enter a valid id" })
     return
@@ -58,6 +60,7 @@ router.put('/:id', async (req, res, next) => {
   let email = req.body.email
   let profile_picture = req.body.name
 
+  // Validations
   if (!name || name == "") {
     res.status(400).json({ message: "Please enter a valid name" })
     return
@@ -79,7 +82,8 @@ router.put('/:id', async (req, res, next) => {
   res.json({ message: "success" })
 })
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', async (req, res) => {
+  // Validating the ID
   if (isNaN(req.params.id)) {
     res.status(400).json({ message: "Please enter a valid id" })
     return

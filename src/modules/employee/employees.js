@@ -5,6 +5,7 @@ export default class Employees {
     this.database = new DB()
   }
 
+  // Getting all employees
   async getAllEmployees(length, offset) {
     let results
     await new Promise((resolve, _reject) => {
@@ -13,9 +14,9 @@ export default class Employees {
 
         let data = []
 
+        // Preparing data with converting timezone
         rows.forEach(row => {
           let created_at = new Date(row.created_at * 1000)
-
           let modified_at = row.modified_at ? (new Date(row.modified_at * 1000)).toLocaleString("en-US", { timeZone: 'Europe/London' }) : null
 
           data.push({ ...row, created_at: created_at.toLocaleString("en-US", { timeZone: 'Europe/London' }), modified_at })
@@ -40,6 +41,7 @@ export default class Employees {
     return results
   }
 
+  // Inserting employee
   async insertEmployee(name, email, profile_picture) {
     let created_at = Date.now()
 
@@ -62,6 +64,7 @@ export default class Employees {
     return results
   }
 
+  // Updating employee
   async updateEmployee(id, name, email, profile_picture) {
     let modified_at = Date.now()
 
@@ -89,6 +92,7 @@ export default class Employees {
     return results
   }
 
+  // Deleting employee
   async deleteEmployee(id) {
     let modified_at = Date.now()
 

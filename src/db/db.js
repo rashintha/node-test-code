@@ -5,6 +5,7 @@ const sqlite3 = require('sqlite3').verbose()
 
 export default class DB {
   constructor() {
+    // Establishing DB connection
     this.database = new sqlite3.Database(process.env.DB_FILE, (err) => {
       if (err) {
         console.error(err.message)
@@ -15,6 +16,7 @@ export default class DB {
     })
   }
 
+  // Initializing the database
   initialize() {
     this.database.serialize(() => {
       this.database.run(`CREATE TABLE IF NOT EXISTS employee (

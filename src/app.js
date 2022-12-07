@@ -12,9 +12,11 @@ const port = process.env.PORT || 3000
 const db = new DB()
 
 db.initialize()
+db.close()
 
 app.use(bodyParser.json())
 
+// Initializing routes
 app.use('/employees', employeeRoutes)
 
 app.listen(port, () => {
